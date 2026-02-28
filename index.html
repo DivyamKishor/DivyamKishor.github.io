@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divyam Kishor — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent: #6ef0c0;
+    --accent2: #5b8fff;
+    --accent3: #ff6b6b;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --glow: rgba(110, 240, 192, 0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+  body:hover .cursor { transform: scale(1); }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* Grid background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(110,240,192,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,240,192,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,15,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 100%;
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(110,240,192,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  h1 .line2 {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(110,240,192,0.5);
+  }
+  h1 .accent-word { color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    font-weight: 500;
+  }
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(110,240,192,0.4);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    margin-top: 5rem;
+    display: flex;
+    gap: 4rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+  h2 span { color: var(--accent); }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 0.88rem;
+    margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--text); }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .skill-tag {
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(110,240,192,0.05);
+  }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .key { color: var(--muted); }
+  .info-row .val { color: var(--text); text-align: right; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--glow);
+  }
+  .project-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #16161f 0%, #1a1a2e 100%);
+  }
+  .project-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    opacity: 0.7;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+  .project-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .project-tag {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+  .tag-hw { background: rgba(255,107,107,0.15); color: var(--accent3); border: 1px solid rgba(255,107,107,0.2); }
+  .tag-sw { background: rgba(91,143,255,0.15); color: var(--accent2); border: 1px solid rgba(91,143,255,0.2); }
+  .tag-iot { background: rgba(110,240,192,0.1); color: var(--accent); border: 1px solid rgba(110,240,192,0.2); }
+
+  .project-icon {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 2rem;
+    opacity: 0.2;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.3rem;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .timeline-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .timeline-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .achievement-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: all 0.3s;
+  }
+  .achievement-card:hover {
+    border-color: var(--accent);
+    transform: translateX(6px);
+  }
+  .ach-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .ach-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .ach-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CERTS */
+  .certs-section {
+    background: linear-gradient(135deg, var(--card), #1a1a2e);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .certs-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(110,240,192,0.05), transparent 70%);
+  }
+  .certs-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .certs-section p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  /* CONTACT */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .contact-text h2 { margin-bottom: 1rem; }
+  .contact-text p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon { font-size: 1.1rem; }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb1 {
+    width: 400px; height: 400px;
+    background: rgba(110,240,192,0.06);
+    top: -100px; right: -100px;
+  }
+  .orb2 {
+    width: 300px; height: 300px;
+    background: rgba(91,143,255,0.06);
+    bottom: 20%;
+    left: -100px;
+    animation-delay: -3s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0,0); }
+    50% { transform: translate(30px, -20px); }
+  }
+
+  /* Section divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1.5rem; }
+    .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .achievements-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    h1 { font-size: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav>
+  <div class="nav-logo">DK<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#journey">Journey</a>
+    <a href="#achievements">Wins</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Available for collaborations & internships</div>
+  <h1>
+    Divyam<br>
+    <span class="line2">Kishor</span>
+    <span class="accent-word">.</span>
+  </h1>
+  <p class="hero-sub">
+    CSE undergraduate @ CMR Institute of Technology, Bangalore. 
+    Building things that live at the intersection of hardware and software — 
+    from ESP32 circuits to full-stack products.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+    <a href="#certificates" class="btn btn-outline">My Certificates ↗</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4th</div>
+      <div class="stat-label">Semester</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Projects Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Things to Learn</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">// who am i</p>
+  <h2>About <span>Me</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>tech enthusiast</strong> and Computer Science Engineering student at CMR Institute of Technology, Bangalore — currently navigating my 4th semester with a genuine love for building things.</p>
+      <p>What drives me? The thrill of <strong>learning something new</strong> every day. Whether it's wiring up a circuit board at midnight or debugging a backend API, I'm most alive when I'm making something from scratch.</p>
+      <p>I started with <strong>hardware projects using ESP32</strong> in my early semesters, and evolved into building full products that combine both embedded systems and web technologies. I believe the best engineers understand the full stack — from the silicon up.</p>
+      <div class="skills-list">
+        <span class="skill-tag">ESP32</span>
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">IoT</span>
+        <span class="skill-tag">Full Stack</span>
+        <span class="skill-tag">Embedded Systems</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+    <div class="about-card reveal">
+      <div class="info-row">
+        <span class="key">Name</span>
+        <span class="val">Divyam Kishor</span>
+      </div>
+      <div class="info-row">
+        <span class="key">College</span>
+        <span class="val">CMR Institute of Technology</span>
+      </div>
+      <div class="info-row">
+        <span class="key">Location</span>
+        <span class="val">Bangalore, India</span>
+      </div>
+      <div class="info-row">
+        <span class="key">Degree</span>
+        <span class="val">B.E. Computer Science</span>
+      </div>
+      <div class="info-row">
+        <span class="key">Semester</span>
+        <span class="val">4th (Current)</span>
+      </div>
+      <div class="info-row">
+        <span class="key">Status</span>
+        <span class="val" style="color: var(--accent);">● Active Builder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// what i've built</p>
+  <h2>My <span>Projects</span></h2>
+  <div class="projects-grid">
+    <div class="project-card featured reveal">
+      <span class="project-icon">🔌</span>
+      <div class="project-num">01 — FEATURED</div>
+      <div class="project-title">Full-Stack IoT Product</div>
+      <p class="project-desc">
+        My most ambitious project yet — a product that bridges the physical and digital worlds. Built using ESP32 on the hardware side and a full-stack web application for the software layer. Started in Semester 3 and actively evolving in Semester 4 with new features and improvements.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-hw">Hardware</span>
+        <span class="project-tag tag-sw">Full Stack</span>
+        <span class="project-tag tag-iot">IoT</span>
+        <span class="project-tag tag-sw">Web App</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <span class="project-icon">⚡</span>
+      <div class="project-num">02</div>
+      <div class="project-title">ESP32 Hardware Projects</div>
+      <p class="project-desc">
+        Hands-on embedded systems projects built during Semesters 1 & 2. Explored microcontroller programming, sensors, and hardware prototyping.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-hw">ESP32</span>
+        <span class="project-tag tag-iot">Embedded</span>
+        <span class="project-tag tag-hw">C/C++</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <span class="project-icon">🌐</span>
+      <div class="project-num">03</div>
+      <div class="project-title">This Portfolio</div>
+      <p class="project-desc">
+        A hand-crafted portfolio website. Clean, minimal, and built with pure HTML, CSS, and JS. No frameworks — just fundamentals done right.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-sw">HTML/CSS</span>
+        <span class="project-tag tag-sw">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <p class="section-label">// my path</p>
+  <h2>The <span>Journey</span></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">2023 — Sem 1 & 2</div>
+      <div class="timeline-title">Hardware Beginnings</div>
+      <p class="timeline-desc">Dived headfirst into embedded systems. Built multiple hardware projects using ESP32, exploring sensors, actuators, and real-time microcontroller programming. This is where the obsession with building began.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2024 — Sem 3</div>
+      <div class="timeline-title">Going Full Stack</div>
+      <p class="timeline-desc">Levelled up. Designed and built a complete product combining hardware and a full-stack web application — my most complex project to date. Competed in multiple tech competitions and earned recognition for the work.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2024–25 — Sem 4 (Now)</div>
+      <div class="timeline-title">Iterating & Expanding</div>
+      <p class="timeline-desc">Actively developing the Semester 3 product further — adding features, refining the architecture, and pushing the boundaries of what it can do. Also exploring new technologies and looking for collaboration opportunities.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label">// recognition</p>
+  <h2>Achievements & <span>Wins</span></h2>
+  <div class="achievements-grid reveal">
+    <div class="achievement-card">
+      <span class="ach-icon">🏆</span>
+      <div>
+        <div class="ach-title">Competition Winner</div>
+        <p class="ach-desc">Participated in multiple tech competitions across semesters — winning some, learning from all. Each competition pushed the product and skills further.</p>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">🔧</span>
+      <div>
+        <div class="ach-title">Hardware to Full-Stack</div>
+        <p class="ach-desc">Evolved from hardware-only projects in Sem 1–2 to a complete hardware + software product by Sem 3. Self-taught the full-stack side while maintaining embedded expertise.</p>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">🚀</span>
+      <div>
+        <div class="ach-title">Product Builder</div>
+        <p class="ach-desc">Built a real product — not just a class project — that combines IoT and web technology. Actively maintaining and improving it through Semester 4.</p>
+      </div>
+    </div>
+    <div class="achievement-card">
+      <span class="ach-icon">📚</span>
+      <div>
+        <div class="ach-title">Lifelong Learner</div>
+        <p class="ach-desc">Constantly exploring new technologies, frameworks, and ideas. From circuits to cloud — the curiosity never stops. Multiple certifications earned along the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <p class="section-label">// credentials</p>
+  <div class="certs-section reveal">
+    <h3>Certificates & <span style="color: var(--accent);">Credentials</span></h3>
+    <p>All my certificates from competitions, courses, and workshops — collected in one place.</p>
+    <a href="#" class="btn btn-primary" onclick="alert('Add your certificates link here! Replace this # with your actual URL.')">
+      View All Certificates ↗
+    </a>
+    <p style="margin-top: 1.5rem; font-size: 0.7rem; color: rgba(136,136,170,0.5);">
+      Google Drive / Notion / LinkedIn — wherever your certs live
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-text">
+      <p class="section-label">// get in touch</p>
+      <h2>Let's <span>Connect</span></h2>
+      <p>
+        Whether you want to collaborate on a project, talk tech, or just say hi — 
+        I'm always open to interesting conversations and opportunities.
+      </p>
+      <a href="mailto:divyam@example.com" class="btn btn-primary">Say Hello ✉</a>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:divyam@example.com" class="contact-link">
+        <span class="contact-link-icon">📧</span>
+        <span>divyam@example.com</span>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        <span>linkedin.com/in/divyamkishor</span>
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-link">
+        <span class="contact-link-icon">🐙</span>
+        <span>github.com/divyamkishor</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-icon">📍</span>
+        <span>Bangalore, Karnataka, India</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by Divyam Kishor &nbsp;·&nbsp; CMR Institute of Technology &nbsp;·&nbsp; 2025</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top = my - 6 + 'px';
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 18 + 'px';
+    ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, .project-card, .achievement-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.transform = 'scale(1.5)';
+      ring.style.opacity = '1';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal, .timeline-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Typing effect in hero
+  const sub = document.querySelector('.hero-sub');
+  const original = sub.textContent;
+</script>
+</body>
+</html>
