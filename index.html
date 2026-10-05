@@ -60,6 +60,76 @@
     z-index: 0;
   }
 
+  /* WORK IN PROGRESS POPUP */
+  .wip-popup {
+    position: fixed;
+    top: 5.8rem;
+    left: 50%;
+    transform: translate(-50%, -18px);
+    width: min(620px, calc(100% - 2rem));
+    background: rgba(17,17,24,0.96);
+    border: 1px solid rgba(110,240,192,0.35);
+    border-radius: 8px;
+    padding: 1.25rem 3.25rem 1.25rem 1.5rem;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.45), 0 0 35px rgba(110,240,192,0.08);
+    backdrop-filter: blur(20px);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .wip-popup.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+  .wip-popup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .wip-label {
+    color: var(--accent);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.45rem;
+  }
+  .wip-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+  }
+  .wip-text {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
+  .wip-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.85rem;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .wip-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   /* NAV */
   nav {
     position: fixed;
@@ -590,6 +660,12 @@
   }
 
   @media (max-width: 768px) {
+    .wip-popup {
+      top: 5.1rem;
+      padding: 1.1rem 3rem 1.1rem 1.1rem;
+    }
+    .wip-title { font-size: 1rem; }
+    .wip-text { font-size: 0.7rem; }
     #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
@@ -609,6 +685,13 @@
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+
+<div class="wip-popup" id="wipPopup" role="status" aria-live="polite">
+  <button class="wip-close" id="wipClose" aria-label="Close announcement">×</button>
+  <div class="wip-label">// status update</div>
+  <div class="wip-title">This portfolio is still a work in progress.</div>
+  <p class="wip-text">I'm currently working on the next version. Visit again soon for the completed profile.</p>
+</div>
 
 <nav>
   <div class="nav-logo">DK<span>.</span></div>
@@ -904,6 +987,19 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
+
+  // Work-in-progress announcement
+  const wipPopup = document.getElementById('wipPopup');
+  const wipClose = document.getElementById('wipClose');
+
+  if (sessionStorage.getItem('wipPopupDismissed') !== 'true') {
+    requestAnimationFrame(() => wipPopup.classList.add('show'));
+  }
+
+  wipClose.addEventListener('click', () => {
+    wipPopup.classList.remove('show');
+    sessionStorage.setItem('wipPopupDismissed', 'true');
+  });
 
   // Typing effect in hero
   const sub = document.querySelector('.hero-sub');
