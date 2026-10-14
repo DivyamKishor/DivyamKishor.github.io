@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Divyam Kishor</title>
+<title>Divyam Kishor — Software, AI &amp; IoT</title>
+<meta name="description" content="Divyam Kishor is an Information Science Engineering student and software developer building full-stack applications, AI-powered tools, and IoT systems.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -451,6 +453,23 @@
     font-size: 2rem;
     opacity: 0.2;
   }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(110,240,192,0.35);
+    padding-bottom: 0.25rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .project-link:hover {
+    color: var(--text);
+    border-color: var(--accent2);
+  }
 
   /* TIMELINE */
   .timeline {
@@ -712,9 +731,8 @@
     <span class="accent-word">.</span>
   </h1>
   <p class="hero-sub">
-    CSE undergraduate @ CMR Institute of Technology, Bangalore. 
-    Building things that live at the intersection of hardware and software — 
-    from ESP32 circuits to full-stack products.
+    Information Science Engineering student, software developer, and builder at CMR Institute of Technology, Bengaluru.
+    I create practical products across full-stack development, AI, and IoT — from mentoring platforms and AI tools to connected hardware prototypes.
   </p>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View Projects ↓</a>
@@ -722,16 +740,16 @@
   </div>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">4th</div>
+      <div class="stat-num">5th</div>
       <div class="stat-label">Semester</div>
     </div>
     <div class="stat">
-      <div class="stat-num">3+</div>
-      <div class="stat-label">Projects Built</div>
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Projects on GitHub</div>
     </div>
     <div class="stat">
-      <div class="stat-num">∞</div>
-      <div class="stat-label">Things to Learn</div>
+      <div class="stat-num">1×</div>
+      <div class="stat-label">National Hackathon Runner-up</div>
     </div>
   </div>
 </section>
@@ -744,21 +762,22 @@
   <h2>About <span>Me</span></h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm a <strong>tech enthusiast</strong> and Information Science Engineering student at CMR Institute of Technology, Bangalore — currently navigating my 4th semester with a genuine love for building things.</p>
-      <p>What drives me? The thrill of <strong>learning something new</strong> every day. Whether it's wiring up a circuit board at midnight or debugging a backend API, I'm most alive when I'm making something from scratch.</p>
-      <p>I started with <strong>hardware projects using ESP32</strong> in my early semesters, and evolved into building full products that combine both embedded systems and web technologies. I believe the best engineers understand the full stack — from the silicon up.</p>
+      <p>I'm a <strong>fifth-semester Information Science Engineering student</strong> at CMR Institute of Technology, Bengaluru, interested in software engineering, AI-powered products, and systems that connect software with the physical world.</p>
+      <p>My work spans <strong>full-stack applications, backend systems, databases, and embedded hardware</strong>. I've built role-based mentoring workflows, explored AI-assisted evaluation, and developed ESP32-based prototypes that combine sensor data with software interfaces.</p>
+      <p>As a former <strong>Software Engineering Intern at Insighte</strong>, I worked on a production application and got hands-on experience with PostgreSQL, database migrations, development and production environments, and deployments. I enjoy taking an idea from a rough prototype to something structured, testable, and usable.</p>
       <div class="skills-list">
-        <span class="skill-tag">ESP32</span>
-        <span class="skill-tag">Arduino</span>
-        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">Java</span>
         <span class="skill-tag">Python</span>
+        <span class="skill-tag">C/C++</span>
         <span class="skill-tag">JavaScript</span>
         <span class="skill-tag">React</span>
         <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">IoT</span>
-        <span class="skill-tag">Full Stack</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Git &amp; GitHub</span>
+        <span class="skill-tag">Railway / Vercel</span>
+        <span class="skill-tag">ESP32 &amp; IoT</span>
         <span class="skill-tag">Embedded Systems</span>
-        <span class="skill-tag">Git</span>
       </div>
     </div>
     <div class="about-card reveal">
@@ -772,7 +791,7 @@
       </div>
       <div class="info-row">
         <span class="key">Location</span>
-        <span class="val">Bangalore, India</span>
+        <span class="val">Bengaluru, India</span>
       </div>
       <div class="info-row">
         <span class="key">Degree</span>
@@ -780,11 +799,11 @@
       </div>
       <div class="info-row">
         <span class="key">Semester</span>
-        <span class="val">4th (Current)</span>
+        <span class="val">5th (Current)</span>
       </div>
       <div class="info-row">
         <span class="key">Status</span>
-        <span class="val" style="color: var(--accent);">● Active Builder</span>
+        <span class="val" style="color: var(--accent);">● Open to Collaboration</span>
       </div>
     </div>
   </div>
@@ -798,43 +817,110 @@
   <h2>My <span>Projects</span></h2>
   <div class="projects-grid">
     <div class="project-card featured reveal">
-      <span class="project-icon">🔌</span>
-      <div class="project-num">01 — FEATURED</div>
-      <div class="project-title">Full-Stack IoT Product</div>
+      <span class="project-icon">🧭</span>
+      <div class="project-num">01 — MOST ACTIVE REPOSITORIES</div>
+      <div class="project-title">Sanghathi — AI-Powered Mentoring Platform</div>
       <p class="project-desc">
-        My most ambitious project yet — a product that bridges the physical and digital worlds. Built using ESP32 on the hardware side and a full-stack web application for the software layer. Started in Semester 3 and actively evolving in Semester 4 with new features and improvements.
+        A role-based mentoring platform designed to bring student records, academic tracking, mentor workflows, reports, and communication into one place. I worked across the React frontend and Node.js backend, including dashboards, API integration, data workflows, and service features.
       </p>
       <div class="project-tags">
-        <span class="project-tag tag-hw">Hardware</span>
-        <span class="project-tag tag-sw">Full Stack</span>
-        <span class="project-tag tag-iot">IoT</span>
-        <span class="project-tag tag-sw">Web App</span>
+        <span class="project-tag tag-sw">React / Vite</span>
+        <span class="project-tag tag-sw">Node.js / Express</span>
+        <span class="project-tag tag-iot">MongoDB</span>
+        <span class="project-tag tag-sw">Role-based workflows</span>
       </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/sanghathi-Frontend" target="_blank" rel="noopener noreferrer">Frontend repository ↗</a>
+      <a class="project-link" href="https://github.com/DivyamKishor/sanghathi-Backend" target="_blank" rel="noopener noreferrer">Backend repository ↗</a>
     </div>
+
     <div class="project-card reveal">
-      <span class="project-icon">⚡</span>
+      <span class="project-icon">🩺</span>
       <div class="project-num">02</div>
-      <div class="project-title">ESP32 Hardware Projects</div>
+      <div class="project-title">MediBot</div>
       <p class="project-desc">
-        Hands-on embedded systems projects built during Semesters 1 & 2. Explored microcontroller programming, sensors, and hardware prototyping.
+        A connected vital-monitoring prototype and dashboard that brings sensor readings, measurement history, charts, reports, and AI-assisted explanations together. The hardware work integrates an ESP32 with physiological and temperature sensors.
       </p>
       <div class="project-tags">
-        <span class="project-tag tag-hw">ESP32</span>
-        <span class="project-tag tag-iot">Embedded</span>
-        <span class="project-tag tag-hw">C/C++</span>
+        <span class="project-tag tag-hw">ESP32 / Sensors</span>
+        <span class="project-tag tag-sw">React / TypeScript</span>
+        <span class="project-tag tag-iot">IoT</span>
+        <span class="project-tag tag-sw">Firebase / Gemini</span>
       </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/MediBot" target="_blank" rel="noopener noreferrer">View repository ↗</a>
     </div>
+
     <div class="project-card reveal">
-      <span class="project-icon">🌐</span>
+      <span class="project-icon">📝</span>
       <div class="project-num">03</div>
-      <div class="project-title">This Portfolio</div>
+      <div class="project-title">EvalIt — AI Answer-Sheet Evaluator</div>
       <p class="project-desc">
-        A hand-crafted portfolio website. Clean, minimal, and built with pure HTML, CSS, and JS. No frameworks — just fundamentals done right.
+        An AI-assisted evaluation tool that compares handwritten student answer sheets with a supplied answer key using Google Gemini. The idea was developed with my team for CODE RUSH, a national 24-hour hackathon where we finished as runner-up.
       </p>
       <div class="project-tags">
-        <span class="project-tag tag-sw">HTML/CSS</span>
-        <span class="project-tag tag-sw">JavaScript</span>
+        <span class="project-tag tag-sw">AI / Gemini</span>
+        <span class="project-tag tag-sw">React / TypeScript</span>
+        <span class="project-tag tag-sw">Education</span>
       </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/evalit" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-icon">📚</span>
+      <div class="project-num">04</div>
+      <div class="project-title">Agentic AI Assessments</div>
+      <p class="project-desc">
+        A collection of agentic-AI coursework, including a Python library-management chatbot with borrowing validation and automated tests.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-sw">Python</span>
+        <span class="project-tag tag-sw">Chatbot logic</span>
+        <span class="project-tag tag-sw">Testing</span>
+      </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/Agentic-AI-Assesments" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-icon">💰</span>
+      <div class="project-num">05</div>
+      <div class="project-title">TrackMo</div>
+      <p class="project-desc">
+        A student-focused personal finance tracker exploring a clearer way to record money received, spending, and everyday budgets through a modern web interface.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-sw">TypeScript</span>
+        <span class="project-tag tag-sw">Web application</span>
+        <span class="project-tag tag-iot">Personal finance</span>
+      </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/TrackMo" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-icon">👥</span>
+      <div class="project-num">06</div>
+      <div class="project-title">FollowGram</div>
+      <p class="project-desc">
+        A tool concept for turning exported Instagram follower and following data into useful comparisons, helping users explore account relationships and changes.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-sw">Data processing</span>
+        <span class="project-tag tag-sw">Web development</span>
+        <span class="project-tag tag-iot">Visualization</span>
+      </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/FollowGram" target="_blank" rel="noopener noreferrer">View repository ↗</a>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-icon">📊</span>
+      <div class="project-num">07</div>
+      <div class="project-title">Digital Evaluation System</div>
+      <p class="project-desc">
+        A project repository focused on digital evaluation workflows and related software implementation.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag tag-sw">Software development</span>
+        <span class="project-tag tag-sw">Education</span>
+      </div>
+      <a class="project-link" href="https://github.com/DivyamKishor/digital-evaluation-system" target="_blank" rel="noopener noreferrer">View repository ↗</a>
     </div>
   </div>
 </section>
@@ -847,19 +933,19 @@
   <h2>The <span>Journey</span></h2>
   <div class="timeline">
     <div class="timeline-item">
-      <div class="timeline-date">2023 — Sem 1 & 2</div>
-      <div class="timeline-title">Hardware Beginnings</div>
-      <p class="timeline-desc">Dived headfirst into embedded systems. Built multiple hardware projects using ESP32, exploring sensors, actuators, and real-time microcontroller programming. This is where the obsession with building began.</p>
+      <div class="timeline-date">Early semesters</div>
+      <div class="timeline-title">Hardware & IoT Foundations</div>
+      <p class="timeline-desc">Started building with ESP32, sensors, and embedded systems. Projects such as MediBot helped me learn hardware integration, sensor calibration, and the challenge of making physical systems work reliably.</p>
     </div>
     <div class="timeline-item">
-      <div class="timeline-date">2024 — Sem 3</div>
-      <div class="timeline-title">Going Full Stack</div>
-      <p class="timeline-desc">Levelled up. Designed and built a complete product combining hardware and a full-stack web application — my most complex project to date. Competed in multiple tech competitions and earned recognition for the work.</p>
+      <div class="timeline-date">Product development</div>
+      <div class="timeline-title">From Prototypes to Applications</div>
+      <p class="timeline-desc">Expanded into full-stack development, APIs, databases, and deployment. Built and iterated on web applications including mentoring workflows and AI-assisted tools, while learning to structure projects for real users.</p>
     </div>
     <div class="timeline-item">
-      <div class="timeline-date">2024–25 — Sem 4 (Now)</div>
-      <div class="timeline-title">Iterating & Expanding</div>
-      <p class="timeline-desc">Actively developing the Semester 3 product further — adding features, refining the architecture, and pushing the boundaries of what it can do. Also exploring new technologies and looking for collaboration opportunities.</p>
+      <div class="timeline-date">Professional experience</div>
+      <div class="timeline-title">Software Engineering Intern — Insighte</div>
+      <p class="timeline-desc">Worked on a production application with PostgreSQL, Alembic migrations, Git-based workflows, staging and production environments, and cloud deployments. The experience strengthened my approach to debugging, reliability, and shipping changes carefully.</p>
     </div>
   </div>
 </section>
@@ -872,31 +958,31 @@
   <h2>Achievements & <span>Wins</span></h2>
   <div class="achievements-grid reveal">
     <div class="achievement-card">
+      <span class="ach-icon">🥈</span>
+      <div>
+        <div class="ach-title">CODE RUSH — National Hackathon Runner-up</div>
+        <p class="ach-desc">Helped shape EvalIt, an AI-powered answer-sheet evaluation idea, during a 24-hour national hackathon at CMRIT.</p>
+      </div>
+    </div>
+    <div class="achievement-card">
       <span class="ach-icon">🏆</span>
       <div>
-        <div class="ach-title">Competition Winner</div>
-        <p class="ach-desc">Participated in multiple tech competitions across semesters — winning some, learning from all. Each competition pushed the product and skills further.</p>
+        <div class="ach-title">MediBot — Project Exhibition Recognition</div>
+        <p class="ach-desc">Continued developing a hardware idea after an earlier competition rejection, turning it into a working sensor-based prototype that earned exhibition recognition.</p>
       </div>
     </div>
     <div class="achievement-card">
-      <span class="ach-icon">🔧</span>
+      <span class="ach-icon">🧑‍💻</span>
       <div>
-        <div class="ach-title">Hardware to Full-Stack</div>
-        <p class="ach-desc">Evolved from hardware-only projects in Sem 1–2 to a complete hardware + software product by Sem 3. Self-taught the full-stack side while maintaining embedded expertise.</p>
+        <div class="ach-title">Production Software Experience</div>
+        <p class="ach-desc">Worked as a Software Engineering Intern at Insighte, contributing to a live application and learning production workflows, database migrations, and deployment practices.</p>
       </div>
     </div>
     <div class="achievement-card">
-      <span class="ach-icon">🚀</span>
+      <span class="ach-icon">🌱</span>
       <div>
-        <div class="ach-title">Product Builder</div>
-        <p class="ach-desc">Built a real product — not just a class project — that combines IoT and web technology. Actively maintaining and improving it through Semester 4.</p>
-      </div>
-    </div>
-    <div class="achievement-card">
-      <span class="ach-icon">📚</span>
-      <div>
-        <div class="ach-title">Lifelong Learner</div>
-        <p class="ach-desc">Constantly exploring new technologies, frameworks, and ideas. From circuits to cloud — the curiosity never stops. Multiple certifications earned along the way.</p>
+        <div class="ach-title">Learning Across Disciplines</div>
+        <p class="ach-desc">Continuing to grow across software engineering, AI, IoT, and systems development while building projects and collaborating with teams.</p>
       </div>
     </div>
   </div>
@@ -940,7 +1026,7 @@
 </section>
 
 <footer>
-  <p>Designed & built by Divyam Kishor &nbsp;·&nbsp; CMR Institute of Technology &nbsp;·&nbsp; 2025</p>
+  <p>Designed &amp; built by Divyam Kishor &nbsp;·&nbsp; CMR Institute of Technology &nbsp;·&nbsp; 2026</p>
 </footer>
 
 <script>
